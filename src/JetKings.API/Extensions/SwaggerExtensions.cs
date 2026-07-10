@@ -46,7 +46,7 @@ public static class SwaggerExtensions
         app.UseSwaggerUI(options =>
         {
             options.SwaggerEndpoint("/swagger/v1/swagger.json", "JetKings API v1");
-            options.RoutePrefix = "swagger";
+            options.RoutePrefix = string.Empty;
         });
 
         return app;
