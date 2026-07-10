@@ -1,0 +1,16 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.swp
+*.orig
+
+## dotnet secrets
+**/appsettings.Development.json
+**/secrets.json
+
+## OS
+.DS_Store
+Thumbs.db
