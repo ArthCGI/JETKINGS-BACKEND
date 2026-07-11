@@ -32,30 +32,29 @@ builder.Services.AddDbContext<JetKingsDbContext>(options =>
 
 builder.Services.AddAutoMapper(cfg =>
 {
-    cfg.AddMaps(typeof(UserMappingProfile));
     cfg.AddMaps(typeof(BuyerMappingProfile));
-    cfg.AddMaps(typeof(ProductMappingProfile));
 });
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();
 builder.Services.AddScoped<IBuyerService, BuyerService>();
-
-
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
  builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader());
+    options.AddPolicy("FrontendPolicy",
+        policy =>
+        {
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
 });
 
 var app = builder.Build();
@@ -73,7 +72,7 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowAll");
+app.UseCors("FrontendPolicy");
 
 app.UseAuthorization();
 
