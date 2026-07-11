@@ -34,6 +34,7 @@ builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddMaps(typeof(UserMappingProfile));
     cfg.AddMaps(typeof(BuyerMappingProfile));
+    cfg.AddMaps(typeof(ProductMappingProfile));
 });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -41,6 +42,11 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();
 builder.Services.AddScoped<IBuyerService, BuyerService>();
+
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+ builder.Services.AddScoped<IProductService, ProductService>();
+
 
 builder.Services.AddCors(options =>
 {
