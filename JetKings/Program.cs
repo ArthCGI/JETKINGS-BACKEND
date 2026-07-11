@@ -41,10 +41,16 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader());
+    options.AddPolicy("FrontendPolicy",
+        policy =>
+        {
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .WithOrigins(
+                "http://jetkings-react-bucket.s3-website-us-east-1.amazonaws.com/"
+                );
+        });
 });
 
 var app = builder.Build();
@@ -62,7 +68,7 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowAll");
+app.UseCors("FrontendPolicy");
 
 app.UseAuthorization();
 
