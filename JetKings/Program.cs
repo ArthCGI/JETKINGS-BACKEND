@@ -33,6 +33,7 @@ builder.Services.AddDbContext<JetKingsDbContext>(options =>
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddMaps(typeof(BuyerMappingProfile));
+    cfg.AddMaps(typeof(BuyerProductPriceMappingProfile));
 });
 
 builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();
@@ -41,6 +42,10 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IGenerateBillService, GenerateBillService>();
+
+builder.Services.AddScoped<IBuyerProductPriceRepository, BuyerProductPriceRepository>();
+builder.Services.AddScoped<IBuyerProductPriceService, BuyerProductPriceService>();
+
 
 builder.Services.AddCors(options =>
 {
