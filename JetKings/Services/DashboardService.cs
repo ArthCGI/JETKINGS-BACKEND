@@ -89,4 +89,34 @@ public class DashboardService : IDashboardService
                 "Failed to retrieve recent activities.");
         }
     }
+    public async Task<ApiResponseDto<BuyerDashboardDto>> GetBuyerDashboardAsync(
+    CancellationToken ct = default)
+    {
+        try
+        {
+            var result = new BuyerDashboardDto
+            {
+                TotalBuyers = await _dbContext.Buyers.CountAsync(ct),
+
+                GstActive = await _dbContext.Buyers
+                    .CountAsync(x => !string.IsNullOrEmpty(x.Gstin), ct),
+
+                RecentOrders = await _dbContext.Invoices.CountAsync(ct),
+
+                PaymentDue = await _dbContext.Invoices
+                    .CountAsync(x => x.Status == "PENDING", ct)
+            };
+
+            return ApiResponseDto<BuyerDashboardDto>.Ok(
+                result,
+                "Buyer dashboard retrieved successfully.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving buyer dashboard");
+
+            return ApiResponseDto<BuyerDashboardDto>.Fail(
+                "Failed to retrieve buyer dashboard.");
+        }
+    }
 }

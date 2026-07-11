@@ -27,4 +27,15 @@ public class DashboardController : BaseApiController
         var result = await _dashboardService.GetRecentActivitiesAsync(ct);
         return OkResponse(result);
     }
+
+
+    [HttpGet("buyers-summary")]
+    public async Task<IActionResult> GetBuyerDashboard(
+        CancellationToken ct = default)
+    {
+        var result = await _dashboardService.GetBuyerDashboardAsync(ct);
+        return OkResponse(result);
+    }
+
+
 }

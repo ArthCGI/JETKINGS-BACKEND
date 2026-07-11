@@ -6,4 +6,8 @@ public interface IDashboardService
 {
     Task<ApiResponseDto<DashboardSummaryDto>> GetDashboardSummaryAsync(CancellationToken ct = default);
     Task<ApiResponseDto<List<RecentActivityDto>>> GetRecentActivitiesAsync(CancellationToken ct = default);
+
+    Task<ApiResponseDto<BuyerDashboardDto>> GetBuyerDashboardAsync(
+        CancellationToken ct = default);
+
 }
