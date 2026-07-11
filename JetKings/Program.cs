@@ -32,12 +32,8 @@ builder.Services.AddDbContext<JetKingsDbContext>(options =>
 
 builder.Services.AddAutoMapper(cfg =>
 {
-    cfg.AddMaps(typeof(UserMappingProfile));
     cfg.AddMaps(typeof(BuyerMappingProfile));
 });
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();
 builder.Services.AddScoped<IBuyerService, BuyerService>();
