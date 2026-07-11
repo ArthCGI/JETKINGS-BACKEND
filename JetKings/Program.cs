@@ -37,6 +37,8 @@ builder.Services.AddAutoMapper(cfg =>
 
 builder.Services.AddScoped<IBuyerRepository, BuyerRepository>();
 builder.Services.AddScoped<IBuyerService, BuyerService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 
 builder.Services.AddCors(options =>
