@@ -59,4 +59,14 @@ public class ProductsController : BaseApiController
         var result = await _productService.DeleteAsync(id, ct);
         return NotFoundResponse(result);
     }
+
+    [HttpGet("category/{categoryId:int}")]
+    public async Task<IActionResult> GetByCategory(
+    int categoryId,
+    CancellationToken ct = default)
+    {
+        var result = await _productService.GetByCategoryAsync(categoryId, ct);
+        return OkResponse(result);
+    }
+
 }

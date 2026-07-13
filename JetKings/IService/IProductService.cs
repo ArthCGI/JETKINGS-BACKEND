@@ -23,4 +23,10 @@ public interface IProductService
     Task<ApiResponseDto<bool>> DeleteAsync(
         int id,
         CancellationToken ct = default);
+
+
+    Task<ApiResponseDto<IEnumerable<ProductResponseDto>>> GetByCategoryAsync(
+        int categoryId,
+        CancellationToken ct = default);
+
 }

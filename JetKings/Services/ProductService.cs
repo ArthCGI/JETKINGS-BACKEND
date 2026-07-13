@@ -111,4 +111,15 @@ public class ProductService : IProductService
 
         return ApiResponseDto<bool>.Ok(true, "Product deleted successfully.");
     }
+
+    public async Task<ApiResponseDto<IEnumerable<ProductResponseDto>>> GetByCategoryAsync(
+     int categoryId,
+     CancellationToken ct = default)
+    {
+        var products = await _productRepository.GetByCategoryAsync(categoryId);
+
+        return ApiResponseDto<IEnumerable<ProductResponseDto>>.Ok(
+            _mapper.Map<IEnumerable<ProductResponseDto>>(products));
+    }
+
 }

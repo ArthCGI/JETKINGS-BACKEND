@@ -59,4 +59,10 @@ public class ProductRepository : IProductRepository
 
         await _context.SaveChangesAsync();
     }
+    public async Task<IEnumerable<Product>> GetByCategoryAsync(int categoryId)
+    {
+        return await _context.Products
+            .Where(p => p.CategoryId == categoryId)
+            .ToListAsync();
+    }
 }
