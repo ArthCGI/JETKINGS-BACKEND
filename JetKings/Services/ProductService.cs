@@ -113,10 +113,19 @@ public class ProductService : IProductService
     }
 
     public async Task<ApiResponseDto<IEnumerable<ProductResponseDto>>> GetByCategoryAsync(
-     int categoryId,
-     CancellationToken ct = default)
+    int? categoryId,
+    CancellationToken ct = default)
     {
-        var products = await _productRepository.GetByCategoryAsync(categoryId);
+        IEnumerable<Product> products;
+
+        if (categoryId.HasValue)
+        {
+            products = await _productRepository.GetByCategoryAsync(categoryId.Value);
+        }
+        else
+        {
+            products = await _productRepository.GetAllAsync();
+        }
 
         return ApiResponseDto<IEnumerable<ProductResponseDto>>.Ok(
             _mapper.Map<IEnumerable<ProductResponseDto>>(products));

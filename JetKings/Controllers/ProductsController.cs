@@ -60,13 +60,15 @@ public class ProductsController : BaseApiController
         return NotFoundResponse(result);
     }
 
-    [HttpGet("category/{categoryId:int}")]
+
+    [HttpGet("category")]
     public async Task<IActionResult> GetByCategory(
-    int categoryId,
-    CancellationToken ct = default)
+        [FromQuery] int? categoryId,
+        CancellationToken ct = default)
     {
         var result = await _productService.GetByCategoryAsync(categoryId, ct);
         return OkResponse(result);
     }
+
 
 }

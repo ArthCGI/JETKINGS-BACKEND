@@ -25,8 +25,10 @@ public interface IProductService
         CancellationToken ct = default);
 
 
+
     Task<ApiResponseDto<IEnumerable<ProductResponseDto>>> GetByCategoryAsync(
-        int categoryId,
+        int? categoryId,
         CancellationToken ct = default);
+
 
 }
