@@ -6,17 +6,17 @@
 ```http
 /api
 ```
-
+  
 ---
-
+ 
 # Buyer Product Prices
 
 ## Get All Buyer Product Prices
-
+ 
 ```http
 GET /api/BuyerProductPrices?page=1&pageSize=10
 ```
-
+ 
 ### Query Parameters
 
 - page (optional, default: 1)
